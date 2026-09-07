@@ -168,6 +168,9 @@ detect_mac80211() {
 			dev_id="set wireless.radio${devidx}.macaddr=$(cat /sys/class/ieee80211/${dev}/macaddress)"
 		fi
 
+		# 2.4G 使用 HT40（可选 20/40MHz），5G 保持探测结果 VHT80（硬件不支持 160MHz）
+		[ "$mode_band" = "2g" ] && htmode=HT40
+
 		uci -q batch <<-EOF
 			set wireless.radio${devidx}=wifi-device
 			set wireless.radio${devidx}.type=mac80211
@@ -175,20 +178,14 @@ detect_mac80211() {
 			set wireless.radio${devidx}.channel=${channel}
 			set wireless.radio${devidx}.band=${mode_band}
 			set wireless.radio${devidx}.htmode=$htmode
-			set wireless.radio${devidx}.disabled=1
-            set wireless.radio${devidx}.txpower=17
+			set wireless.radio${devidx}.disabled=0
+			set wireless.radio${devidx}.country='US'
+			set wireless.radio${devidx}.txpower=17
 
 			set wireless.default_radio${devidx}=wifi-iface
 			set wireless.default_radio${devidx}.device=radio${devidx}
 			set wireless.default_radio${devidx}.network=lan
 			set wireless.default_radio${devidx}.mode=ap
-			set wireless.radio1.country='US'
-			set wireless.radio1.htmode='HT20'
-			set wireless.radio1.channel='auto'
-
-			set wireless.radio0.country='US'
-			set wireless.radio0.htmode='VHT80'
-			set wireless.radio1.channel='auto'
 
 EOF
 		uci -q commit wireless
