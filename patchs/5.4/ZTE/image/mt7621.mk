@@ -1682,8 +1682,8 @@ define Device/zte_e8820v2
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := ZTE
   DEVICE_MODEL := E8820V2
-  DEVICE_PACKAGES := kmod-mt7603e kmod-mt76x2e \
-	luci-app-mtwifi
+    DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 \
+	kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += zte_e8820v2
 
