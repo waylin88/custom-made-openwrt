@@ -113,6 +113,14 @@ jobs:
         cd openwrt
         ./scripts/feeds update -a
 
+    - name: 删除多余组件
+      run: |
+        cd openwrt
+        rm -rf feeds/small/lean
+        # 重建feeds索引，否则install -a仍会安装已删除的lean包（生成悬空软链接）
+        ./scripts/feeds update -i
+
+
     - name: 安装插件
       run: |
         cd openwrt
