@@ -50,7 +50,7 @@ echo -e '\nyuos Build @ '${BUILD_STRING}'\n'  >> package/base-files/files/etc/ba
 sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
 echo "DISTRIB_REVISION=''" >> package/base-files/files/etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='yuos Build @ ${BUILD_STRING}'" >> package/base-files/files/etc/openwrt_release
+#echo "DISTRIB_DESCRIPTION='yuos Build @ ${BUILD_STRING}'" >> package/base-files/files/etc/openwrt_release
 
 # 修改 luci version.lua
 sed -i '/luciversion/d' feeds/luci/modules/luci-base/luasrc/version.lua
