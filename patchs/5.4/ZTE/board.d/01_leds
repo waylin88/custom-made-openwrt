@@ -116,8 +116,8 @@ youhua,wr1200js)
 zte,e8820v2)
 	ucidef_set_led_netdev"sys" "SYS_LED" "$boardname:white:sys""eth0" "tx rx"
 	ucidef_set_led_default"power" "POWER_LED" "$boardname:white:power" "1"
-	ucidef_set_led_netdev "wlan2g" "mt76-phy0" "wlan0" "link tx rx"
-	ucidef_set_led_netdev "wlan5g" "mt76-phy1" "wlan1" "link tx rx"
+	ucidef_set_led_netdev "wlan2g" "" "mt76-phy0" "wlan0" "link tx rx"
+	ucidef_set_led_netdev "wlan5g" "" "mt76-phy1" "wlan1" "link tx rx"
 	;;
 esac
 
