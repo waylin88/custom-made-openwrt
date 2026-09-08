@@ -46,11 +46,11 @@ cp -rf package/firmware/xt_FULLCONENAT.c package/libs/libnetfilter-conntrack/xt_
 YUOS_DATE="$(date +%Y.%m.%d)(Public beta)"
 BUILD_STRING=${BUILD_STRING:-$YUOS_DATE}
 echo "Write build date in openwrt : $BUILD_DATE"
-echo -e '\nyuos Build @ '${BUILD_STRING}'\n'  >> package/base-files/files/etc/banner
+echo -e '\Build @ '${BUILD_STRING}'\n'  >> package/base-files/files/etc/banner
 sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
 echo "DISTRIB_REVISION=''" >> package/base-files/files/etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-#echo "DISTRIB_DESCRIPTION='yuos Build @ ${BUILD_STRING}'" >> package/base-files/files/etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='Build @ ${BUILD_STRING}'" >> package/base-files/files/etc/openwrt_release
 
 # 修改 luci version.lua
 sed -i '/luciversion/d' feeds/luci/modules/luci-base/luasrc/version.lua
