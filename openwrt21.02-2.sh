@@ -50,7 +50,11 @@ echo -e '\Build @ '${BUILD_STRING}'\n'  >> package/base-files/files/etc/banner
 sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
 echo "DISTRIB_REVISION=''" >> package/base-files/files/etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='Build @ ${BUILD_STRING}'" >> package/base-files/files/etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='OpenWrt SNAPSHOT r21946-f62a355c97'" >> package/base-files/files/etc/openwrt_release
+
+# 自定义 LuCI 版本名称和版本号
+sed -i 's/luciname    = ".*"/luciname    = "LuCI Master"/g' feeds/luci/modules/luci-base/src/mkversion.sh
+sed -i 's/luciversion = ".*"/luciversion = "git-22.325.41248-fa17c15"/g' feeds/luci/modules/luci-base/src/mkversion.sh
 
 # 修改 luci version.lua
 sed -i '/luciversion/d' feeds/luci/modules/luci-base/luasrc/version.lua
