@@ -178,7 +178,7 @@ detect_mac80211() {
 		else
 			mode_band=5g
 			htmode=VHT80
-			channel=149
+			channel=auto
 		fi
 
 		uci -q batch <<-EOF
@@ -189,8 +189,6 @@ detect_mac80211() {
 			set wireless.radio${devidx}.band=${mode_band}
 			set wireless.radio${devidx}.htmode=$htmode
 			set wireless.radio${devidx}.disabled=0
-			set wireless.radio${devidx}.country='US'
-			set wireless.radio${devidx}.txpower=17
 
 			set wireless.default_radio${devidx}=wifi-iface
 			set wireless.default_radio${devidx}.device=radio${devidx}
