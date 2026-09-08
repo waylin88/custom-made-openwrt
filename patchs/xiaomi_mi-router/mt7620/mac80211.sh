@@ -168,8 +168,18 @@ detect_mac80211() {
 			dev_id="set wireless.radio${devidx}.macaddr=$(cat /sys/class/ieee80211/${dev}/macaddress)"
 		fi
 
-		# 2.4G 使用 HT40（可选 20/40MHz），5G 保持探测结果 VHT80（硬件不支持 160MHz）
-		[ "$mode_band" = "2g" ] && htmode=HT40
+		# 固定频段配置（E8820v2 硬件探针顺序固定：pcie0=2.4G -> radio0，pcie1=5G -> radio1）
+		# radio0=2.4G: HT40（可选 20/40MHz）
+		# radio1=5G:   VHT80（硬件不支持 160MHz），固定信道 149（非DFS，中美制式下均有信号）
+		if [ "$devidx" = "0" ]; then
+			mode_band=2g
+			htmode=HT40
+			channel=auto
+		else
+			mode_band=5g
+			htmode=VHT80
+			channel=149
+		fi
 
 		uci -q batch <<-EOF
 			set wireless.radio${devidx}=wifi-device
